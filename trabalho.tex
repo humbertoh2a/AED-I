@@ -1,0 +1,269 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ------------------------- PREÂMBULO DO DOCUMENTO --------------------------- %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Define a classe do documento. 'article' é ideal para relatórios curtos.
+% 'a4paper' define o tamanho do papel e '12pt' o tamanho da fonte.
+\documentclass[a4paper, 12pt]{article}
+
+% --- Pacotes Essenciais ---
+
+% Codificação de caracteres para aceitar acentos (ç, ã, é, etc.)
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+% Suporte completo para a língua portuguesa (hifenização, nomes como "Figura", etc.)
+\usepackage[brazil]{babel}
+
+% Pacotes para matemática avançada (para escrever as fórmulas de complexidade)
+\usepackage{amsmath, amssymb}
+
+% Pacote para incluir imagens (seus gráficos)
+\usepackage{graphicx}
+
+% Pacote para configurar as margens da página
+\usepackage[a4paper, margin=2.5cm]{geometry}
+
+% Pacote para criar links clicáveis no PDF (no sumário e em referências)
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=blue,
+}
+
+% Pacote para ter mais controle sobre a posição de figuras e tabelas
+\usepackage{float}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% -------------------------- INFORMAÇÕES DO TÍTULO --------------------------- %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Relatório de Análise de Algoritmos:\\ Inversão, Busca Sequencial e Busca Binária}
+\author{
+    Eduardo Malafronte Alves de Souza (nusp: 16862798) \\
+    Humberto Henrique de Amorim (nusp: 16814612) \\
+    Lucas Vinicius da Costa (nusp: 16885265)
+}
+\date{\today} % \today insere a data atual automaticamente
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ---------------------------- INÍCIO DO DOCUMENTO --------------------------- %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+% Gera a página de título com as informações definidas acima
+\maketitle
+
+% Gera o sumário automaticamente a partir das seções
+\tableofcontents
+\newpage
+
+
+% --------------------------------- INTRODUÇÃO ------------------------------- %
+\section{Introdução}
+
+O objetivo geral deste trabalho é implementar, analisar e comparar a eficiência de diferentes algoritmos: a inversão vetorial, a busca sequencial e a busca binária, tanto em sua forma iterativa quanto recursiva. A análise foi conduzida de forma experimental, através da medição do tempo de execução, e teórica, pela contagem de operações de comparação e atribuição no pior caso. Para os testes, foram utilizadas entradas de 10, 100, 1.000 e 5.000 elementos, e o tempo médio foi calculado a partir de, no mínimo, 100 execuções para garantir a precisão dos resultados.
+
+\newpage
+
+% ------------------------------ ANÁLISE DOS ALGORITMOS ---------------------- %
+\section{Análise dos Algoritmos}
+
+Nesta seção, apresentamos os resultados obtidos para cada algoritmo, incluindo o gráfico de tempo de execução e a análise teórica de complexidade no pior caso.
+
+% --- Algoritmo 1: Inversão de Vetor ---
+\subsection{Inversão de Vetor}
+
+O gráfico de análise de desempenho do algoritmo de inversão vetorial explicita o caráter linear do crescimento do tempo de execução conforme o aumento do tamanho da entrada, comportamento esse esperado para um algoritmo que precisa percorrer o vetor.
+
+\begin{figure}[H] % [H] tenta forçar a imagem a ficar exatamente aqui
+    \centering
+    \includegraphics[width=0.8\textwidth]{grafico inversao tempo x entrada individual.png} % <-- SUBSTITUA PELO NOME DO SEU ARQUIVO
+    \caption{Tempo de execução médio para o algoritmo de Inversão de Vetor.}
+    \label{fig:inversao}
+\end{figure}
+
+\textbf{Análise de Complexidade (Pior Caso):}
+O algoritmo de inversão percorre o vetor até a sua metade, realizando uma operação de troca a cada iteração. Uma troca envolve 3 atribuições. O laço "for" executa $N/2$ vezes. A contagem de operações é aproximadamente:
+$$ T(N) = 5\lfloor\frac{N}{2}\rfloor + 2 $$
+Isso resulta em uma complexidade de tempo de $O(N)$.
+
+\textbf{Resultados Experimentais - Operações Médias:}
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Tamanho da Entrada (N)} & \textbf{Operações Médias} \\
+\hline
+10 & 27,00 \\
+100 & 252,00 \\
+1.000 & 2.502,00 \\
+5.000 & 12.502,00 \\
+\hline
+\end{tabular}
+\caption{Número de operações médias para o algoritmo de Inversão de Vetor}
+\label{tab:inversao}
+\end{table}
+
+A complexidade teórica de $O(N)$ justifica o comportamento linear observado na análise gráfica, confirmando que o tempo de execução do algoritmo escala proporcionalmente com o tamanho da entrada.
+
+\newpage
+
+% --- Algoritmo 2: Busca Sequencial ---
+\subsection{Busca Sequencial}
+
+O gráfico de desempenho para o algoritmo de busca sequencial também demonstra um crescimento linear do tempo de execução. Assim como no algoritmo de inversão, este comportamento é esperado, pois, no pior caso, a busca sequencial precisa percorrer todos os N elementos do vetor.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{grafico busca sequencial tempo x entrada individual.png} % <-- SUBSTITUA PELO NOME DO SEU ARQUIVO
+    \caption{Tempo de execução médio (pior caso) para a Busca Sequencial.}
+    \label{fig:sequencial}
+\end{figure}
+
+\textbf{Análise de Complexidade (Pior Caso):}
+O pior caso ocorre quando o elemento procurado não está no vetor ou é o último. Nesse cenário, o algoritmo realiza uma comparação para cada um dos $N$ elementos do vetor.
+$$ T(N) = 3N + 2 $$
+Onde temos $N$ comparações no laço, $N$ incrementos do contador, $N$ comparações com o elemento procurado, uma comparação inicial e uma operação de retorno. A complexidade de tempo é, portanto, $O(N)$.
+
+\textbf{Resultados Experimentais - Operações Médias:}
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Tamanho da Entrada (N)} & \textbf{Operações Médias} \\
+\hline
+10 & 32,00 \\
+100 & 302,00 \\
+1.000 & 3.002,00 \\
+5.000 & 15.002,00 \\
+\hline
+\end{tabular}
+\caption{Número de operações médias para o algoritmo de Busca Sequencial}
+\label{tab:sequencial}
+\end{table}
+
+A complexidade teórica de $O(N)$ justifica o comportamento linear observado na análise
+gráfica, confirmando que o tempo de execução do algoritmo escala proporcionalmente com
+o tamanho da entrada.
+
+\newpage
+
+% --- Algoritmo 3 e 4: Busca Binária ---
+\subsection{Buscas Binárias (Iterativa e Recursiva)}
+Os algoritmos de busca binária apresentaram desempenho superior aos algoritmos lineares, confirmando sua característica logarítmica fundamental.
+
+\begin{figure}[H]
+    \centering
+    % Se tiver dois gráficos, pode colocá-los lado a lado ou um abaixo do outro
+    \includegraphics[width=0.8\textwidth]{grafico busca binaria iterativa tempo x entrada individual.png} % <-- SUBSTITUA
+    \caption{Tempo de execução médio (pior caso) para a Busca Binária Iterativa.}
+    \label{fig:binaria_it}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{grafico busca binaria recursiva individual.png} % <-- SUBSTITUA
+    \caption{Tempo de execução médio (pior caso) para a Busca Binária Recursiva.}
+    \label{fig:binaria_rec}
+\end{figure}
+
+\newpage
+
+\textbf{Análise de Complexidade (Pior Caso):}
+
+\textbf{Busca Binária Iterativa:} A cada iteração, o algoritmo realiza comparações para determinar em qual metade continuar a busca, além de operações de atualização dos índices:
+$$ T(N) = 5\lfloor\log_2(N)\rfloor + 3 $$
+
+\textbf{Busca Binária Recursiva:} A implementação recursiva adiciona o overhead das chamadas de função:
+$$ T(N) = 4\lfloor\log_2(N)\rfloor + 1 $$
+
+\textbf{Resultados Experimentais - Operações Médias:}
+
+\textbf{Busca Binária Iterativa:}
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Tamanho da Entrada (N)} & \textbf{Operações Médias} \\
+\hline
+10 & 23,00 \\
+100 & 38,00 \\
+1.000 & 53,00 \\
+5.000 & 68,00 \\
+\hline
+\end{tabular}
+\caption{Número de operações médias para a Busca Binária Iterativa}
+\label{tab:binaria_it}
+\end{table}
+
+\textbf{Busca Binária Recursiva:}
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Tamanho da Entrada (N)} & \textbf{Operações Médias} \\
+\hline
+10 & 21,00 \\
+100 & 36,00 \\
+1.000 & 51,00 \\
+5.000 & 66,00 \\
+\hline
+\end{tabular}
+\caption{Número de operações médias para a Busca Binária Recursiva}
+\label{tab:binaria_rec}
+\end{table}
+
+Ambas as versões mantêm complexidade de tempo $O(\log N)$. Os dados experimentais confirmam o comportamento logarítmico esperado, com a versão iterativa apresentando desempenho consistentemente similar à recursiva em termos de número de operações.
+
+\newpage
+
+% --------------------------------- CONCLUSÃO -------------------------------- %
+\section{Conclusão}
+
+A análise experimental dos quatro algoritmos revelou duas classes distintas de complexidade e desempenho, $O(\log N)$ e $O(N)$. Para visualizar essa diferença de forma direta, o gráfico de desempenho comparativo entre todos os algortimos apresenta as curvas de tempo de execução deles em um único eixo.
+
+\begin{figure}[H] % [H] tenta forçar a imagem a ficar exatamente aqui
+    \centering
+    \includegraphics[width=0.9\textwidth]{grafico comparacao geral desempenho tempo x entrada.png} % <-- SUBSTITUA PELO NOME DO SEU GRÁFICO COMPARATIVO
+    \caption{Comparativo de desempenho entre os algoritmos analisados (Pior caso).}
+    \label{fig:comparativo}
+\end{figure}
+
+O gráfico indica claramente que as curvas dos algoritmos de Inversão de Vetor e Busca Sequencial crescem de forma linear e acentuada, confirmando sua complexidade $O(N)$. Em contraste, as curvas das Buscas Binárias (Iterativa e Recursiva) permanecem praticamente planas na base do gráfico, mal registrando aumento de tempo mesmo com 5.000 elementos. Essa representação visual demonstra a imensa escalabilidade e eficiência dos algoritmos de complexidade logarítmica ($O(\log N)$) em comparação com os lineares ($O(N)$).
+
+Para entradas pequenas, a diferença de tempo pode ser irrelevante, mas para sistemas que manipulam grandes quantidades de dados, a escolha de um algoritmo $O(\log N)$ em vez de um $O(N)$ é de suma importância para a performance. Portanto, é possível concluir que os resultados experimentais obtidos foram consistentes com a teoria de análise de algoritmos, demonstrando a importância do estudo da complexidade para o desenvolvimento de soluções computacionais eficientes.
+
+\newpage
+
+% ------------------------- CONTRIBUIÇÃO DOS MEMBROS ------------------------- %
+\section{Contribuição dos Membros da Equipe}
+
+A seguir, a descrição das principais contribuições de cada membro da equipe:
+
+\begin{itemize}
+    \item \textbf{Eduardo Malafronte Alves de Souza:}
+        \begin{itemize}
+            \item Criação de todos os gráficos para a visualização e análise do tempo de execução dos algoritmos.
+            \item Redação, estruturação e formatação do relatório, consolidando os resultados e as análises da equipe.
+        \end{itemize}
+        
+    \item \textbf{Humberto Henrique de Amorim:}
+        \begin{itemize}
+            \item Coleta e tabulação dos dados de tempo de execução.
+            \item Análise teórica da contagem de operações dos algoritmos.
+        \end{itemize}
+        
+    \item \textbf{Lucas Vinicius da Costa:}
+        \begin{itemize}
+            \item Responsável pelo desenvolvimento da solução em linguagem C, implementando os quatro algoritmos solicitados.
+        \end{itemize}
+\end{itemize}
+
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ------------------------------ FIM DO DOCUMENTO ---------------------------- %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

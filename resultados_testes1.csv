@@ -1,0 +1,17 @@
+algoritmo,tamanho_entrada,tempo_medio_us,operacoes_medio
+inversao,10,0.06,5.00
+busca_sequencial,10,0.05,7.58
+busca_binaria_iterativa,10,0.06,6.68
+busca_binaria_recursiva,10,0.03,6.36
+inversao,100,0.20,50.00
+busca_sequencial,100,0.13,48.85
+busca_binaria_iterativa,100,0.09,11.13
+busca_binaria_recursiva,100,0.10,11.05
+inversao,1000,1.74,500.00
+busca_sequencial,1000,1.17,499.85
+busca_binaria_iterativa,1000,0.15,16.98
+busca_binaria_recursiva,1000,0.15,16.72
+inversao,5000,9.34,2500.00
+busca_sequencial,5000,5.47,2347.79
+busca_binaria_iterativa,5000,0.16,21.58
+busca_binaria_recursiva,5000,0.20,21.26

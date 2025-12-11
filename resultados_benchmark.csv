@@ -1,0 +1,17 @@
+Algoritmo,Tamanho_Entrada,Tempo_Medio_Microssegundos,Operacoes_Medias
+Busca_Sequencial,10,0.06,5.18
+Busca_Sequencial,100,0.11,45.38
+Busca_Sequencial,1000,1.20,462.94
+Busca_Sequencial,5000,4.77,2223.38
+Inversao,10,0.11,15.00
+Inversao,100,0.25,150.00
+Inversao,1000,2.21,1500.00
+Inversao,5000,7.72,7500.00
+Busca_Binaria_Iterativa,10,0.02,2.51
+Busca_Binaria_Iterativa,100,0.03,5.16
+Busca_Binaria_Iterativa,1000,0.16,7.15
+Busca_Binaria_Iterativa,5000,0.45,10.06
+Busca_Binaria_Recursiva,10,0.05,2.60
+Busca_Binaria_Recursiva,100,0.06,5.08
+Busca_Binaria_Recursiva,1000,0.12,7.67
+Busca_Binaria_Recursiva,5000,0.40,10.22
